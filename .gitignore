@@ -2,3 +2,4 @@ test_pi
 *.o
 *.gcda
 *.gcno
+test_can
