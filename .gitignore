@@ -3,3 +3,11 @@ test_pi
 *.gcda
 *.gcno
 test_can
+test_pi
+test_sm
+test_can
+cruise_demo
+*.o
+*.gcda
+*.gcno
+cruise_demo.csv
