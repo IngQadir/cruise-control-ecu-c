@@ -67,6 +67,8 @@ find_program(CPPCHECK_EXE cppcheck)
 if(CPPCHECK_EXE)
     # unusedFunction / staticFunction are suppressed because the public API
     # functions are called from test/, which is not part of this analysis.
+    # unmatchedSuppression: different cppcheck versions report different
+    # checks, so a suppression that matches nothing must not fail the build.
     add_custom_target(cppcheck
         COMMAND ${CPPCHECK_EXE}
                 --enable=all --inconclusive --std=c99
@@ -76,6 +78,7 @@ if(CPPCHECK_EXE)
                 --suppress=unusedFunction
                 --suppress=staticFunction
                 --suppress=checkersReport
+                --suppress=unmatchedSuppression
                 -I ${CMAKE_SOURCE_DIR}/src
                 ${CMAKE_SOURCE_DIR}/src
         COMMENT "Running cppcheck on src/"
