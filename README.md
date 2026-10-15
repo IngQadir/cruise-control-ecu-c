@@ -130,6 +130,17 @@ python3 tools/animate_plot.py                       # live window
 python3 tools/animate_plot.py --scenario steep_hill
 python3 tools/test_cc_wrapper.py                    # 9 smoke tests
 ```
+### 2D road view (pygame)
+
+The same C controller drives a simple road view with speedometer, throttle bar and state display.
+The hill tilts the road, and the brake lights switch on when the driver brakes.
+
+![Road view](docs/road_view.gif)
+![Steep hill](docs/road_view_steep_hill.gif)
+
+Run it with `python3 tools/road_view.py` (needs `sudo apt install python3-pygame`).
+Keys: SPACE pause, R restart, 1/2 scenario, UP/DOWN playback speed, ESC quit.
+
 
 
 ## Project structure
