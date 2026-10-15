@@ -65,14 +65,20 @@ add_unity_test(test_can_signals)
 # ---------------------------------------------------------------------------
 find_program(CPPCHECK_EXE cppcheck)
 if(CPPCHECK_EXE)
+    # unusedFunction / staticFunction are suppressed because the public API
+    # functions are called from test/, which is not part of this analysis.
     add_custom_target(cppcheck
         COMMAND ${CPPCHECK_EXE}
                 --enable=all --inconclusive --std=c99
+                --check-level=exhaustive
                 --error-exitcode=1
                 --suppress=missingIncludeSystem
                 --suppress=unusedFunction
+                --suppress=staticFunction
+                --suppress=checkersReport
                 -I ${CMAKE_SOURCE_DIR}/src
                 ${CMAKE_SOURCE_DIR}/src
         COMMENT "Running cppcheck on src/"
         VERBATIM)
 endif()
+
