@@ -11,3 +11,4 @@ cruise_demo
 *.gcda
 *.gcno
 cruise_demo.csv
+build/
