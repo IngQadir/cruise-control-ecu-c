@@ -35,6 +35,19 @@ if(ENABLE_COVERAGE)
 endif()
 
 # ---------------------------------------------------------------------------
+# Shared library for Python (ctypes): build/libcc.so
+# Same three modules, so Python drives the real ECU code.
+# ---------------------------------------------------------------------------
+add_library(cc_shared SHARED
+    src/pi_controller.c
+    src/cc_statemachine.c
+    src/can_signals.c)
+set_target_properties(cc_shared PROPERTIES OUTPUT_NAME cc)
+target_include_directories(cc_shared PUBLIC src)
+set_strict_warnings(cc_shared)
+
+
+# ---------------------------------------------------------------------------
 # Demo application
 # ---------------------------------------------------------------------------
 add_executable(cruise_demo src/main.c)

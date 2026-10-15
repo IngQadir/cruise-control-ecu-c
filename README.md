@@ -113,6 +113,24 @@ lcov --capture --directory build-cov --output-file build-cov/coverage.info
 lcov --extract build-cov/coverage.info "*/src/*" --output-file build-cov/coverage_src.info
 genhtml build-cov/coverage_src.info --output-directory build-cov/html
 ```
+## Live visualization (C code driven from Python)
+
+The three C modules are also built as a shared library (`build/libcc.so`). A Python
+wrapper (`tools/cc_wrapper.py`, `ctypes`) calls the real `cc_init` and `cc_step`, so the
+animation shows the decisions of the actual ECU code, not a Python copy.
+
+![Demo scenario](docs/cruise_demo_live.gif)
+
+*Steep hill: the throttle saturates at 100 %, then the speed overshoots after the hill.*
+
+![Steep hill](docs/steep_hill_live.gif)
+
+```bash
+python3 tools/animate_plot.py                       # live window
+python3 tools/animate_plot.py --scenario steep_hill
+python3 tools/test_cc_wrapper.py                    # 9 smoke tests
+```
+
 
 ## Project structure
 
@@ -130,6 +148,7 @@ tools/      plot script for the demo output
 - Speed hold only. There is no distance control to a vehicle ahead.
 - 8 of 126 lines are not covered by tests yet (defensive code and error paths).
 - Branch coverage has not been measured yet.
+- The steep-hill scenario shows a speed overshoot after throttle saturation; the controller tuning (Ki) and anti-windup strategy are not optimized yet.
 
 ## Possible next steps
 

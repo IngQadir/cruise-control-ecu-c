@@ -12,3 +12,5 @@ cruise_demo
 *.gcno
 cruise_demo.csv
 build/
+build-cov/
+__pycache__/
